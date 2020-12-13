@@ -40,8 +40,12 @@ import java.net.URL;
 import java.util.*;
 
 import org.apache.http.*;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.params.AllClientPNames;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
 
@@ -52,11 +56,36 @@ import org.apache.http.protocol.HttpContext;
 
 public class HTTPFactory
 {
+    private static HTTPSession session = null;
+
+    // Added by zequi to make credentials work like loadeR.java
+    static public void setCredentials(String url, String username, String password) throws HTTPException {
+        CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        credsProvider.setCredentials(
+                new AuthScope(url, AuthScope.ANY_PORT),
+                new UsernamePasswordCredentials(username, password));
+
+        //session = HTTPFactory.newSession(new HttpHost(url));
+        HTTPFactory.session = new HTTPSession(url);
+        session.setCredentialsProvider(credsProvider);
+
+        HTTPFactory.session = session;
+    }
+
+    static public HTTPSession newSession() throws HTTPException
+    {
+        return HTTPFactory.session;
+    }
+
+    static public HTTPSession newSession(String legalurl) throws HTTPException
+    {
+        return HTTPFactory.session;
+    }
 
     //////////////////////////////////////////////////////////////////////////
     // Static factory methods for creating HTTPSession instances
 
-    static public HTTPSession newSession() throws HTTPException
+   /* static public HTTPSession newSession() throws HTTPException
     {
         return new HTTPSession();
     }
@@ -64,7 +93,7 @@ public class HTTPFactory
     static public HTTPSession newSession(String legalurl) throws HTTPException
     {
         return new HTTPSession(legalurl);
-    }
+    }*/
 
     //////////////////////////////////////////////////////////////////////////
     // Static factory methods for creating HTTPMethod instances

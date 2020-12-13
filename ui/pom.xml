@@ -19,6 +19,12 @@
   <url>http://www.unidata.ucar.edu/software/tds/</url>
 
   <dependencies>
+<!-- https://mvnrepository.com/artifact/org.itadaki/bzip2 -->
+<dependency>
+    <groupId>org.itadaki</groupId>
+    <artifactId>bzip2</artifactId>
+    <version>0.9.1</version>
+</dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>cdm</artifactId>

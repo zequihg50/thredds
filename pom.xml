@@ -181,6 +181,27 @@
       <id>unidata-3rdparty</id>
       <url>https://artifacts.unidata.ucar.edu/content/repositories/unidata-3rdparty/</url>
     </repository>
+    <repository>
+      <id>asdf1</id>
+      <url>https://maven.geotoolkit.org</url>
+    </repository>
+    <repository>
+      <id>asdf2</id>
+      <url>https://52north.org/maven/repo/releases</url>
+    </repository>
+    <repository>
+      <id>asdf3</id>
+      <url>https://artifacts.unidata.ucar.edu/content/repositories/unidata</url>
+    </repository>
+    <repository>
+      <id>asdf4</id>
+      <!--<url>https://repo.boundlessgeo.com/main/edu/wisc/ssec</url>-->
+      <url>https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/</url>
+    </repository>
+    <repository>
+      <id>asdf5</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
   </repositories>
 
   <!-- ===========================================================

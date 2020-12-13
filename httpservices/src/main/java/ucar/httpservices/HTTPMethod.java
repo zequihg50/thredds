@@ -440,7 +440,7 @@ public class HTTPMethod implements AutoCloseable
         if(closed)
             throw new IllegalStateException("HTTPMethod: method is closed");
         if(this.methodstream != null) { // duplicate: caller's problem
-            HTTPSession.log.warn("HTTPRequest.getResponseBodyAsStream: Getting method stream multiple times");
+            //HTTPSession.log.warn("HTTPRequest.getResponseBodyAsStream: Getting method stream multiple times");
         } else { // first time
             HTTPMethodStream stream = null;
             try {

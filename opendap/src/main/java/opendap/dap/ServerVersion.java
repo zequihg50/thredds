@@ -147,9 +147,9 @@ public class ServerVersion implements java.io.Serializable {
         // OPeNDAP server. Period. Without the information contained
         // in these headers some data types (Such as Sequence) cannot
         // be correctly serialized/deserialized.
-        throw new DAP2Exception("Not a valid OPeNDAP server - " +
-                "Missing MIME Header fields! Either \"XDAP\" " +
-                "or \"XDODS-Server.\" must be present.");
+        //throw new DAP2Exception("Not a valid OPeNDAP server - " +
+        //        "Missing MIME Header fields! Either \"XDAP\" " +
+        //        "or \"XDODS-Server.\" must be present.");
 
 
     }
