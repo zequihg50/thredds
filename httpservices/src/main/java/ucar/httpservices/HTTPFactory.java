@@ -56,44 +56,33 @@ import org.apache.http.protocol.HttpContext;
 
 public class HTTPFactory
 {
-    private static HTTPSession session = null;
-
-    // Added by zequi to make credentials work like loadeR.java
-    static public void setCredentials(String url, String username, String password) throws HTTPException {
-        CredentialsProvider credsProvider = new BasicCredentialsProvider();
-        credsProvider.setCredentials(
-                new AuthScope(url, AuthScope.ANY_PORT),
-                new UsernamePasswordCredentials(username, password));
-
-        //session = HTTPFactory.newSession(new HttpHost(url));
-        HTTPFactory.session = new HTTPSession(url);
-        session.setCredentialsProvider(credsProvider);
-
-        HTTPFactory.session = session;
-    }
-
-    static public HTTPSession newSession() throws HTTPException
-    {
-        return HTTPFactory.session;
-    }
-
-    static public HTTPSession newSession(String legalurl) throws HTTPException
-    {
-        return HTTPFactory.session;
-    }
+	public static CredentialsProvider provider = null;
+	
+	static public void setCredentials(String host, String user, String password) {
+    	AuthScope authScope = new AuthScope(host, AuthScope.ANY_PORT);
+    	UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(user, password);
+        CredentialsProvider provider = new BasicCredentialsProvider();
+        provider.setCredentials(authScope, credentials);
+        
+        HTTPFactory.provider = provider;
+	}
 
     //////////////////////////////////////////////////////////////////////////
     // Static factory methods for creating HTTPSession instances
 
-   /* static public HTTPSession newSession() throws HTTPException
+    static public HTTPSession newSession() throws HTTPException
     {
-        return new HTTPSession();
+    	HTTPSession session =  new HTTPSession();
+        session.setCredentialsProvider(HTTPFactory.provider);
+        return session;
     }
 
     static public HTTPSession newSession(String legalurl) throws HTTPException
     {
-        return new HTTPSession(legalurl);
-    }*/
+        HTTPSession session =  new HTTPSession(legalurl);
+        session.setCredentialsProvider(HTTPFactory.provider);
+        return session;
+    }
 
     //////////////////////////////////////////////////////////////////////////
     // Static factory methods for creating HTTPMethod instances

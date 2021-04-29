@@ -38,6 +38,7 @@ import net.jcip.annotations.NotThreadSafe;
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.DeflateDecompressingEntity;
@@ -49,6 +50,8 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.AbstractHttpClient;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.SyncBasicHttpParams;
@@ -904,6 +907,7 @@ public class HTTPSession implements AutoCloseable
     execute(HttpRequestBase request)
         throws IOException
     {
+    	this.execcontext.setAttribute(ClientContext.CREDS_PROVIDER, HTTPFactory.provider);
         HttpResponse response = sessionClient.execute(request, this.execcontext);
         return response;
     }
